@@ -1,0 +1,8 @@
+.dont-have {
+  text-decoration: underline;
+}
+
+.dont-have:hover {
+  cursor: pointer;
+}
+/*# sourceMappingURL=App.css.map */

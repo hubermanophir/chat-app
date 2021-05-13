@@ -1,0 +1,6 @@
+.dont-have {
+	text-decoration: underline;
+	&:hover {
+		cursor: pointer;
+	}
+}

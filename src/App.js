@@ -4,6 +4,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import ChatApp from './Components/ChatApp';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
+import style from './App.css';
 
 firebase.initializeApp({
 	apiKey: 'AIzaSyCY9-1IVkhI1xoDTI0Bx5xKv_wLBQ6Zo-w',
@@ -20,6 +21,7 @@ const firestore = firebase.firestore();
 
 function App() {
 	const [user] = useAuthState(auth);
+	console.log(user);
 	return (
 		<div className="App">
 			{user ? (
