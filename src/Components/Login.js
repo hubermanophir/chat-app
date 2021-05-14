@@ -5,7 +5,8 @@ export default function Login() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	const signIn = () => {
+	const signIn = (e) => {
+		e.preventDefault();
 		console.log(email, password);
 		firebase
 			.auth()
@@ -24,17 +25,21 @@ export default function Login() {
 			<h1>Chat App</h1>
 			<div>Login here</div>
 			<div>
-				<input
-					onChange={(e) => setEmail(e.target.value)}
-					type="email"
-					required
-				/>
-				<input
-					onChange={(e) => setPassword(e.target.value)}
-					type="password"
-					required
-				/>
-				<button onClick={signIn}>Signup</button>
+				<form>
+					<input
+						onChange={(e) => setEmail(e.target.value)}
+						type="email"
+						required
+						placeholder="email"
+					/>
+					<input
+						onChange={(e) => setPassword(e.target.value)}
+						type="password"
+						required
+						placeholder="password"
+					/>
+					<button onClick={signIn}>Login</button>
+				</form>
 			</div>
 		</div>
 	);
