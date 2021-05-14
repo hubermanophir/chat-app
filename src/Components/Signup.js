@@ -14,18 +14,6 @@ export default function Signup({ user, username, setUsername }) {
 
 	const usersRef = firestore.collection('users');
 
-	function saveUserToFirestore(url) {
-		usersRef
-			.add({
-				user_UID: user.uid,
-				user_image: url,
-				username: user.displayName,
-			})
-			.then((response) => {
-				console.log(response);
-			});
-	}
-
 	// const signUpWithGoogle = () => {
 	// 	const provider = new firebase.auth.GoogleAuthProvider();
 	// 	firebase.auth().signInWithPopup(provider);

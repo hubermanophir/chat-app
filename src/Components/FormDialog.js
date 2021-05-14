@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -6,9 +6,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { v4 as uuidv4 } from 'uuid';
+import firebase from 'firebase';
 
 export default function FormDialog() {
 	const [open, setOpen] = React.useState(false);
+	const firestore = firebase.firestore();
+	const [chatroomName, setChatroomName] = useState();
+	const chatRef = firestore.collection('chatrooms');
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -19,6 +24,17 @@ export default function FormDialog() {
 	};
 
 	const createHandler = () => {
+		chatRef
+			.add({
+				chatroom_id: uuidv4(),
+				chatroom_name: chatroomName,
+			})
+			.then((res) => {
+				console.log('added successfully');
+			})
+			.catch(() => {
+				console.log('error');
+			});
 		setOpen(false);
 	};
 
@@ -47,6 +63,7 @@ export default function FormDialog() {
 						label="Chatroom name"
 						type="text"
 						fullWidth
+						onChange={(e) => setChatroomName(e.target.value)}
 					/>
 				</DialogContent>
 				<DialogActions>
