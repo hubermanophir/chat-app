@@ -18,7 +18,6 @@ export default function FormDialog({ user }) {
   const [chatroomName, setChatroomName] = useState();
   const chatRef = firestore.collection("chatrooms");
   const usersRef = firestore.collection("users");
-  console.log(usersRef);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -29,18 +28,28 @@ export default function FormDialog({ user }) {
   };
 
   const getUser = async () => {
-    // const dbUser = await usersRef.where("user_UID", "==", user.uid);
-    // console.log(dbUser);
-    // const users = useCollection(usersRef);
+    let theUser;
+    const querySnapshot = await firestore
+      .collection("users")
+      .where("user_UID", "==", user.uid)
+      .get();
+
+    querySnapshot.forEach(function (doc) {
+      theUser = doc.data();
+    });
+
+    return theUser;
   };
 
-  const createHandler = () => {
-    getUser();
+  const createHandler = async () => {
+    const theUser = await getUser();
     chatRef
       .add({
         chatroom_id: uuidv4(),
         chatroom_name: chatroomName,
-        participants: [{ user_UID: "test", username: "test" }],
+        participants: [
+          { user_UID: theUser.user_UID, username: theUser.username },
+        ],
       })
       .then((res) => {
         console.log("added successfully");

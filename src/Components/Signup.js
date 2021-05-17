@@ -12,18 +12,15 @@ export default function Signup({ user, username, setUsername }) {
   const [imgUrl, setImgUrl] = useState();
   const storage = app.storage();
   const firestore = app.firestore();
-
   const usersRef = firestore.collection("users");
 
-  // const signUpWithGoogle = () => {
-  // 	const provider = new app.auth.GoogleAuthProvider();
-  // 	app.auth().signInWithPopup(provider);
-  // };
-
-  // const signUpWithFacebook = () => {
-  // 	const provider = new app.auth.FacebookAuthProvider();
-  // 	app.auth().signInWithPopup(provider);
-  // };
+  const createUser = async (id, image, username) => {
+    usersRef.add({
+      user_UID: id,
+      user_image: image,
+      username,
+    });
+  };
 
   const signUpWithMail = (e) => {
     e.preventDefault();
@@ -35,13 +32,15 @@ export default function Signup({ user, username, setUsername }) {
       .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
         firebase
           .storage()
           .ref(`user_images/${user.uid}.png`)
           .put(imageFile)
-          .then(() => {
-            console.log("successfuly uploaded");
+          .then(async () => {
+            const url = await storage
+              .ref(`user_images/${user.uid}.png`)
+              .getDownloadURL();
+            createUser(user.uid, url, username);
           })
           .catch((error) => console.log(error.message));
       })

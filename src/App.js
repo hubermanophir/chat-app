@@ -6,6 +6,8 @@ import style from "./App.css";
 import { useEffect, useState } from "react";
 import Login from "./Components/Login";
 import app from "./firebase";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Chatroom from "./Components/Chatroom";
 
 const auth = app.auth();
 const firestore = app.firestore();
@@ -45,7 +47,7 @@ function App() {
         .catch((err) => {});
     }
   }
-  uploadImage();
+  // uploadImage();
   useEffect(() => {
     if (user) {
       storage
@@ -56,19 +58,23 @@ function App() {
           // console.log(res);
         })
         .catch((err) => {
-          console.log(err.message);
+          // console.log(err.message);
         });
     }
   }, [user]);
-
-  if (user) {
-    console.log(user);
-  }
-
   return (
     <div className="App">
       {user ? (
-        <ChatApp user={user} />
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <ChatApp user={user} />
+            </Route>
+            <Route exact path="/chatroom/:id">
+              <Chatroom user={user} />
+            </Route>
+          </Switch>
+        </Router>
       ) : (
         <>
           <Login />
