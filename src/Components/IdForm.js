@@ -30,8 +30,13 @@ export default function IdForm({ user }) {
   };
   console.log(user);
   return (
-    <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+    <div className='my-id-div'>
+      <Button
+        className="id-button"
+        variant="outlined"
+        color="primary"
+        onClick={handleClickOpen}
+      >
         What's my Id
       </Button>
       <Dialog
@@ -40,9 +45,7 @@ export default function IdForm({ user }) {
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
-        <DialogTitle id="responsive-dialog-title">
-          {'Your ID'}
-        </DialogTitle>
+        <DialogTitle id="responsive-dialog-title">{"Your ID"}</DialogTitle>
         <DialogContent>
           <DialogContentText>{user.uid}</DialogContentText>
         </DialogContent>

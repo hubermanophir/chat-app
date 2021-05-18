@@ -66,7 +66,7 @@ export default function InviteDialog({ user, chatPassword }) {
   };
 
   return (
-    <div>
+    <div className="invitation-div">
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
         Invitation
       </Button>

@@ -7,15 +7,20 @@ import Message from "./Message";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import InviteDialog from "./InviteDialog";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { IconButton } from "@material-ui/core";
 
 export default function Chatroom({ user, setUserAllowed, userAllowed }) {
   const [chatPassword, setChatPassword] = useState("");
+  const [chatroom, setChatroom] = useState("");
   const firestore = app.firestore();
   const history = useHistory();
   const db = app.firestore();
   const messagesRef = db.collection("messages");
   const messageRef = useRef();
   const passwordRef = useRef();
+  const dummy = useRef();
+
   const query = messagesRef
     .where("chatroom_id", "==", history.location.pathname.slice(10))
     .orderBy("createdAt");
@@ -76,6 +81,7 @@ export default function Chatroom({ user, setUserAllowed, userAllowed }) {
 
     res.forEach((doc) => {
       chatroom = doc.data();
+      setChatroom(chatroom.chatroom_name);
     });
 
     let bool = false;
@@ -95,6 +101,7 @@ export default function Chatroom({ user, setUserAllowed, userAllowed }) {
   useEffect(() => {
     userInChat();
     setPasswordState();
+    dummy.current.scrollIntoView({ behavior: "smooth" });
   }, []);
 
   const addMessage = async () => {
@@ -122,6 +129,7 @@ export default function Chatroom({ user, setUserAllowed, userAllowed }) {
       user_image: userObj.image,
     });
     messageRef.current.value = "";
+    dummy.current.scrollIntoView({ behavior: "smooth" });
   };
 
   const submitPassword = () => {
@@ -135,18 +143,31 @@ export default function Chatroom({ user, setUserAllowed, userAllowed }) {
 
   return (
     <div>
-      <h1>Chatroom</h1>
+      <h1>{chatroom}</h1>
       {userAllowed ? (
         <>
-          {allMessages
-            ? allMessages.map((message, i) => {
-                return (
-                  <Message key={`message ${i}`} message={message} user={user} />
-                );
-              })
-            : null}
-          <input ref={messageRef} type="text" />
-          <button onClick={addMessage}>send</button>
+          <div className="message-area">
+            <div className="messages-container">
+              {allMessages
+                ? allMessages.map((message, i) => {
+                    return (
+                      <Message
+                        key={`message ${i}`}
+                        message={message}
+                        user={user}
+                      />
+                    );
+                  })
+                : null}
+              <div ref={dummy}></div>
+            </div>
+            <div className="message-input-div">
+              <input className="message-input" ref={messageRef} type="text" />
+              <button className="send-message" onClick={addMessage}>
+                send
+              </button>
+            </div>
+          </div>
           <div>
             <InviteDialog user={user} chatPassword={chatPassword} />
           </div>
@@ -158,8 +179,12 @@ export default function Chatroom({ user, setUserAllowed, userAllowed }) {
           <button onClick={submitPassword}>ok</button>
         </>
       )}
-      <div>
-        <Link to="/">Go back home</Link>
+      <div className="back-div">
+        <IconButton>
+          <Link className="back-a" to="/">
+            <ArrowBackIcon fontSize="large" />
+          </Link>
+        </IconButton>
       </div>
     </div>
   );

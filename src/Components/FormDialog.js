@@ -56,7 +56,7 @@ export default function FormDialog({ user }) {
   };
 
   return (
-    <div>
+    <div className="create-chatroom">
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
         Create Chatroom
       </Button>

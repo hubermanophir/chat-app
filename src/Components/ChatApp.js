@@ -38,27 +38,37 @@ export default function ChatApp({ user }) {
 
   return (
     <div>
-      <FormDialog user={user} />
-      {myChatrooms
-        ? myChatrooms.map((room) => {
-            return (
-              <div>
-                <Link to={`/chatroom/${room.chatroom_id}`}>
-                  {room.chatroom_name}
-                </Link>
-              </div>
-            );
-          })
-        : null}
-      <IdForm user={user} />
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => app.auth().signOut()}
-      >
-        Sign Out
-      </Button>
-      {/* <button onClick={() => app.auth().signOut()}>Sign Out</button> */}
+      <h1>My Chat Rooms</h1>
+      <div className="button-container">
+        <FormDialog user={user} />
+        <IdForm user={user} />
+      </div>
+      <div className="chatroom-container">
+        {myChatrooms
+          ? myChatrooms.map((room) => {
+              return (
+                <div className="room-div">
+                  <Link
+                    className="room-link"
+                    to={`/chatroom/${room.chatroom_id}`}
+                  >
+                    {room.chatroom_name}
+                  </Link>
+                </div>
+              );
+            })
+          : null}
+      </div>
+      <div className="logout-id-container">
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => app.auth().signOut()}
+          className="sign-out-button"
+        >
+          Sign Out
+        </Button>
+      </div>
     </div>
   );
 }

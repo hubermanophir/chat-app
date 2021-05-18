@@ -19,10 +19,10 @@ function App() {
   const [user] = useAuthState(auth);
   const [username, setUsername] = useState();
   const [userAllowed, setUserAllowed] = useState(true);
+  const [hideLogin, setHideLogin] = useState(false);
 
   return (
     <div className="App">
-      <h1 className="main-title">Chat App</h1>
       {user ? (
         <Router>
           <Switch>
@@ -40,8 +40,16 @@ function App() {
         </Router>
       ) : (
         <>
-          <Login />
-          <Signup user={user} username={username} setUsername={setUsername} />
+          <h1 className="main-title">Chat App</h1>
+          {hideLogin ? null : <Login />}
+          {/* <Login /> */}
+          <Signup
+            user={user}
+            username={username}
+            setHideLogin={setHideLogin}
+            setUsername={setUsername}
+            hideLogin={hideLogin}
+          />
         </>
       )}
     </div>

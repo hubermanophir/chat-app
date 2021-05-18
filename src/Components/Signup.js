@@ -1,8 +1,15 @@
+import { Button } from "@material-ui/core";
 import firebase from "firebase";
 import React, { useState } from "react";
 import app from "../firebase";
 
-export default function Signup({ user, username, setUsername }) {
+export default function Signup({
+  user,
+  username,
+  setUsername,
+  setHideLogin,
+  hideLogin,
+}) {
   const [signUpOpen, setSignUpOpen] = useState(false);
 
   const [email, setEmail] = useState();
@@ -52,11 +59,6 @@ export default function Signup({ user, username, setUsername }) {
 
   return (
     <div>
-      {/* <button onClick={signUpWithGoogle}>Sign in Using Google</button>
-			<button onClick={signUpWithFacebook}>Sign in Using Facebook</button> */}
-      <div className="dont-have" onClick={() => setSignUpOpen(!signUpOpen)}>
-        Don't have a user yet?
-      </div>
       {signUpOpen ? (
         <form className="signup-container">
           <input
@@ -87,11 +89,28 @@ export default function Signup({ user, username, setUsername }) {
             }}
             className="signup-image"
           />
-          <button className="signup-button" onClick={signUpWithMail}>
+          {/* <button className="signup-button" onClick={signUpWithMail}>
             Signup
-          </button>
+          </button> */}
+          <Button
+            variant="outlined"
+            color="primary"
+            className="signup-button"
+            onClick={signUpWithMail}
+          >
+            Signup
+          </Button>
         </form>
       ) : null}
+      <div
+        className="dont-have"
+        onClick={() => {
+          setSignUpOpen(!signUpOpen);
+          setHideLogin(!hideLogin);
+        }}
+      >
+        Don't have a user yet?
+      </div>
     </div>
   );
 }

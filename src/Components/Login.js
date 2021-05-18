@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core";
 import React, { useState } from "react";
 import app from "../firebase";
 
@@ -38,9 +39,12 @@ export default function Login() {
             placeholder="password"
             className="login-password"
           />
-          <button className="login-button" onClick={signIn}>
+          {/* <button className="login-button" onClick={signIn}>
             Login
-          </button>
+          </button> */}
+          <Button variant="outlined" color="primary" onClick={signIn}>
+            Login
+          </Button>
         </form>
       </div>
     </div>

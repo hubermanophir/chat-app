@@ -1,16 +1,15 @@
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
-.main-title {
+body {
+  margin: 0;
+}
+h1 {
   text-align: center;
   font-size: 5em;
 }
 
 .login-div {
-  border-style: solid;
-  border-width: 1px;
-  border-color: black;
-  border-radius: 5px;
   width: max-content;
   margin: auto;
   text-align: center;
@@ -20,12 +19,186 @@
 .login-input-container {
   display: flex;
   flex-direction: column;
-  padding: 2em 1em;
+  padding: 1em 1em;
 }
 
-.dont-have {
-  text-decoration: underline;
+.login-email {
+  font-size: 0.6em;
+  text-align: center;
+  margin-bottom: 0.2em;
+}
+.login-password {
+  text-align: center;
+  font-size: 0.6em;
+  margin-bottom: 0.2em;
+}
+
+.login-button {
+  font-size: 0.6em;
+  width: fit-content;
+  margin: auto;
+  margin-top: 2em;
   &:hover {
     cursor: pointer;
   }
+}
+.signup-container {
+  width: max-content;
+  margin: auto;
+  text-align: center;
+  font-size: 3em;
+  display: flex;
+  flex-direction: column;
+  padding: 1em 1em;
+}
+.signup-username {
+  text-align: center;
+  font-size: 0.6em;
+  margin-bottom: 0.2em;
+}
+.signup-email {
+  text-align: center;
+  font-size: 0.6em;
+  margin-bottom: 0.2em;
+}
+.signup-password {
+  text-align: center;
+  font-size: 0.6em;
+  margin-bottom: 0.2em;
+}
+.signup-image {
+  text-align: center;
+  font-size: 0.4em;
+  margin-bottom: 0.2em;
+}
+.signup-button {
+  text-align: center;
+  font-size: 0.6em;
+  margin-bottom: 0.2em;
+}
+.dont-have {
+  text-decoration: underline;
+  text-align: center;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.button-container {
+  display: flex;
+  width: fit-content;
+  margin: auto;
+}
+.create-chatroom {
+  width: fit-content;
+  margin: auto;
+  margin-right: 1em;
+}
+.chatroom-container {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  margin: auto;
+  margin-top: 1em;
+}
+.room-div {
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 4px;
+  border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+  border-radius: 10px;
+  font-size: 2.5em;
+  margin-bottom: 0.4em;
+  text-align: center;
+  padding: 0.1em;
+}
+.room-link {
+  text-decoration: none;
+  color: black;
+  &:visited {
+    color: black;
+  }
+}
+.logout-id-container {
+  width: fit-content;
+  margin: auto;
+  margin-top: 2em;
+}
+
+.messages-container {
+  height: 35em;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+.message-area {
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 4px;
+  border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+  border-radius: 10px;
+  max-width: 70em;
+  margin: auto;
+  padding: 2em;
+  position: relative;
+}
+
+.message {
+  position: relative;
+  padding: 0.5em;
+  border-radius: 5px;
+  border-width: 1px;
+  margin-bottom: 0.5em;
+  background-color: hsla(0, 0%, 0%, 0.027);
+}
+.message-container {
+  height: 5em;
+  position: relative;
+}
+.current-img-name {
+  width: fit-content;
+  position: absolute;
+  right: 0;
+}
+.other-img-name {
+  width: fit-content;
+  position: absolute;
+}
+.current-username {
+  text-align: center;
+}
+.other-username {
+  text-align: center;
+}
+.current-message {
+  text-align: right;
+  padding-right: 4em;
+  padding-bottom: 0.5em;
+  font-size: 1.3em;
+}
+.other-message {
+  padding-left: 4em;
+  padding-bottom: 0.5em;
+  font-size: 1.3em;
+}
+.message-input-div {
+  width: max-content;
+  margin: auto;
+  margin-top: 1em;
+}
+.message-input {
+  font-size: 1.3em;
+  max-width: 100em;
+}
+.send-message {
+  font-size: 1.3em;
+}
+.invitation-div {
+  width: max-content;
+  margin: auto;
+  margin-top: 1em;
+}
+.back-div {
+  width: fit-content;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
