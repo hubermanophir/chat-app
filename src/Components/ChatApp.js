@@ -4,10 +4,14 @@ import FormDialog from "./FormDialog";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import app from "../firebase";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import IdForm from "./IdForm";
+import { Button } from "@material-ui/core";
 const firestore = app.firestore();
 const chatRef = firestore.collection("chatrooms");
 
 export default function ChatApp({ user }) {
+  const db = app.firestore();
+  const usersRef = db.collection("users");
   const [chatRooms] = useCollectionData(chatRef);
   const [myChatrooms, setMyChatrooms] = useState([]);
   useEffect(() => {
@@ -46,7 +50,15 @@ export default function ChatApp({ user }) {
             );
           })
         : null}
-      <button onClick={() => app.auth().signOut()}>Sign Out</button>
+      <IdForm user={user} />
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => app.auth().signOut()}
+      >
+        Sign Out
+      </Button>
+      {/* <button onClick={() => app.auth().signOut()}>Sign Out</button> */}
     </div>
   );
 }

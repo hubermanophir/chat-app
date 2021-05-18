@@ -43,20 +43,15 @@ export default function FormDialog({ user }) {
 
   const createHandler = async () => {
     const theUser = await getUser();
-    chatRef
-      .add({
-        chatroom_id: uuidv4(),
-        chatroom_name: chatroomName,
-        participants: [
-          { user_UID: theUser.user_UID, username: theUser.username },
-        ],
-      })
-      .then((res) => {
-        console.log("added successfully");
-      })
-      .catch(() => {
-        console.log("error");
-      });
+    const roomId = uuidv4();
+    chatRef.doc(roomId).set({
+      password: uuidv4(),
+      chatroom_id: roomId,
+      chatroom_name: chatroomName,
+      participants: [
+        { user_UID: theUser.user_UID, username: theUser.username },
+      ],
+    });
     setOpen(false);
   };
 
