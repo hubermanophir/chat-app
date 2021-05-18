@@ -19,49 +19,49 @@ function App() {
   const [user] = useAuthState(auth);
   const [username, setUsername] = useState();
 
-  function saveUserToFirestore(image_url) {
-    usersRef
-      .add({
-        user_UID: user.uid,
-        user_image: image_url,
-        username: username,
-      })
-      .then((response) => {
-        console.log("added success");
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log("didnt add");
-        console.log(err.message);
-      });
-  }
+  // function saveUserToFirestore(image_url) {
+  //   usersRef
+  //     .add({
+  //       user_UID: user.uid,
+  //       user_image: image_url,
+  //       username: username,
+  //     })
+  //     .then((response) => {
+  //       console.log("added success");
+  //       console.log(response);
+  //     })
+  //     .catch((err) => {
+  //       console.log("didnt add");
+  //       console.log(err.message);
+  //     });
+  // }
 
-  function uploadImage() {
-    if (user) {
-      storage
-        .ref(`user_images/${user.uid}.png`)
-        .getDownloadURL()
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {});
-    }
-  }
-  // uploadImage();
-  useEffect(() => {
-    if (user) {
-      storage
-        .ref(`user_images/${user.uid}.png`)
-        .getDownloadURL()
-        .then((res) => {
-          saveUserToFirestore(res);
-          // console.log(res);
-        })
-        .catch((err) => {
-          // console.log(err.message);
-        });
-    }
-  }, [user]);
+  // function uploadImage() {
+  //   if (user) {
+  //     storage
+  //       .ref(`user_images/${user.uid}.png`)
+  //       .getDownloadURL()
+  //       .then((res) => {
+  //         console.log(res);
+  //       })
+  //       .catch((err) => {});
+  //   }
+  // }
+  // // uploadImage();
+  // useEffect(() => {
+  //   if (user) {
+  //     storage
+  //       .ref(`user_images/${user.uid}.png`)
+  //       .getDownloadURL()
+  //       .then((res) => {
+  //         saveUserToFirestore(res);
+  //         // console.log(res);
+  //       })
+  //       .catch((err) => {
+  //         // console.log(err.message);
+  //       });
+  //   }
+  // }, [user]);
   return (
     <div className="App">
       {user ? (

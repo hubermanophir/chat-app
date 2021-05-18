@@ -89,10 +89,10 @@ export default function Chatroom({ user }) {
         : null}
       <input ref={messageRef} type="text" />
       <button onClick={addMessage}>send</button>
-      <div>
+      {/* <div>
         <input ref={inviteRef} type="text" />
         <button onClick={inviteHandler}>invite</button>
-      </div>
+      </div> */}
       <div>
         <Link to="/">Go back home</Link>
       </div>
