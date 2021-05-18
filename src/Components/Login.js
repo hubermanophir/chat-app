@@ -21,24 +21,26 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h1>Chat App</h1>
-      <div>Login here</div>
+    <div className="login-div">
       <div>
-        <form>
+        <form className="login-input-container">
           <input
             onChange={(e) => setEmail(e.target.value)}
             type="email"
             required
             placeholder="email"
+            className="login-email"
           />
           <input
             onChange={(e) => setPassword(e.target.value)}
             type="password"
             required
             placeholder="password"
+            className="login-password"
           />
-          <button onClick={signIn}>Login</button>
+          <button className="login-button" onClick={signIn}>
+            Login
+          </button>
         </form>
       </div>
     </div>

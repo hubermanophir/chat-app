@@ -15,36 +15,13 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import { IconButton, Paper } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: "2px 4px",
-    display: "flex",
-    alignItems: "center",
-    width: 400,
-  },
-  input: {
-    marginLeft: theme.spacing(1),
-    flex: 1,
-  },
-  iconButton: {
-    padding: 10,
-  },
-  divider: {
-    height: 28,
-    margin: 4,
-  },
-}));
-
 export default function InviteDialog({ user, chatPassword }) {
-  const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const firestore = app.firestore();
   const history = useHistory();
 
   const [userUid, setUserUid] = useState("");
 
-  const chatRef = firestore.collection("chatrooms");
-  const usersRef = firestore.collection("users");
   const db = app.firestore();
 
   const handleClickOpen = () => {
@@ -128,7 +105,7 @@ export default function InviteDialog({ user, chatPassword }) {
             Cancel
           </Button>
           <Button onClick={createHandler} color="primary">
-            Create
+            Invite
           </Button>
         </DialogActions>
       </Dialog>

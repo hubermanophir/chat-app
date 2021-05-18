@@ -10,6 +10,7 @@ import InviteDialog from "./InviteDialog";
 
 export default function Chatroom({ user, setUserAllowed, userAllowed }) {
   const [chatPassword, setChatPassword] = useState("");
+  const firestore = app.firestore();
   const history = useHistory();
   const db = app.firestore();
   const messagesRef = db.collection("messages");
@@ -20,6 +21,38 @@ export default function Chatroom({ user, setUserAllowed, userAllowed }) {
     .orderBy("createdAt");
 
   const [allMessages] = useCollectionData(query);
+
+  const getUser = async (id) => {
+    let theUser;
+    const querySnapshot = await firestore
+      .collection("users")
+      .where("user_UID", "==", id)
+      .get();
+
+    querySnapshot.forEach(function (doc) {
+      theUser = doc.data();
+    });
+
+    return theUser;
+  };
+
+  const addUser = async () => {
+    db.collection("chatrooms")
+      .where("chatroom_id", "==", history.location.pathname.slice(10))
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach(async (doc) => {
+          const temp = doc.data().participants;
+          const theUser = await getUser(user.uid);
+          temp.push({ user_UID: theUser.user_UID, username: theUser.username });
+          const obj = Object.assign({}, doc.data());
+          obj.participants = temp;
+          db.collection("chatrooms")
+            .doc(history.location.pathname.slice(10))
+            .set(obj);
+        });
+      });
+  };
 
   const setPasswordState = async () => {
     let chatroom;
@@ -94,6 +127,7 @@ export default function Chatroom({ user, setUserAllowed, userAllowed }) {
   const submitPassword = () => {
     if (passwordRef.current.value === chatPassword) {
       setUserAllowed(true);
+      addUser();
     } else {
       return;
     }

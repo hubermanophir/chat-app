@@ -22,6 +22,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1 className="main-title">Chat App</h1>
       {user ? (
         <Router>
           <Switch>

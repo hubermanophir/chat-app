@@ -58,18 +58,26 @@ export default function Signup({ user, username, setUsername }) {
         Don't have a user yet?
       </div>
       {signUpOpen ? (
-        <form>
+        <form className="signup-container">
+          <input
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="username"
+            required
+            className="signup-username"
+          />
           <input
             onChange={(e) => setEmail(e.target.value)}
             type="email"
             required
             placeholder="email"
+            className="signup-email"
           />
           <input
             onChange={(e) => setPassword(e.target.value)}
             type="password"
             required
             placeholder="password"
+            className="signup-password"
           />
           <input
             required
@@ -77,13 +85,11 @@ export default function Signup({ user, username, setUsername }) {
             onChange={(e) => {
               setImageFile(e.target.files[0]);
             }}
+            className="signup-image"
           />
-          <input
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="username"
-            required
-          />
-          <button onClick={signUpWithMail}>Signup</button>
+          <button className="signup-button" onClick={signUpWithMail}>
+            Signup
+          </button>
         </form>
       ) : null}
     </div>
